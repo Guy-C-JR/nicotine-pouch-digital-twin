@@ -4,6 +4,14 @@ title: "Population–Molecular Cancer Digital Twin for oral nicotine pouches: fi
 version: 1.0.0
 date-released: 2026-10-12
 license: MIT
+doi: 10.5281/zenodo.23325760
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23325760
+    description: "Concept DOI (all versions)"
+  - type: doi
+    value: 10.5281/zenodo.23325761
+    description: "Version 1.0.0"
 repository-code: "https://github.com/Guy-C-JR/nicotine-pouch-digital-twin"
 type: software
 authors:

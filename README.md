@@ -4,8 +4,7 @@
 
 > Giordano GC Jr. Artificial intelligence–enabled digital twins for forecasting cancer burden from oral nicotine pouches: a review and expert opinion. *AI Biology & Medicine* (submitted).
 
-<!-- After the first Zenodo release, add the DOI badge here, e.g.:
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX) -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23325760.svg)](https://doi.org/10.5281/zenodo.23325760)
 
 ## Read this first
 
@@ -62,7 +61,10 @@ The figures in `figures/output/` were produced with Graphviz 16.1.0, Python 3.9,
 
 ## How to cite
 
-Please cite the article, and this repository through its Zenodo DOI (see `CITATION.cff`).
+Please cite the article and this repository. The citation details are in `CITATION.cff`.
+
+- **This version (v1.0.0):** Giordano GC Jr. Population–Molecular Cancer Digital Twin for oral nicotine pouches: figure-generation code and framework pseudocode. Version 1.0.0 [software]. Zenodo; 2026. https://doi.org/10.5281/zenodo.23325761
+- **All versions (always resolves to the latest):** https://doi.org/10.5281/zenodo.23325760
 
 ## License
 
