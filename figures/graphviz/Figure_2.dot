@@ -1,0 +1,36 @@
+// Figure 2. Architecture of the Population–Molecular Cancer Digital Twin.
+// Render with:
+//   dot -Tpdf Figure_2.dot -o ../Figure_2.pdf
+//   dot -Tpng -Gdpi=600 Figure_2.dot -o ../Figure_2.png
+digraph Fig2 {
+  graph [rankdir=TB, nodesep=0.3, ranksep=0.3, pad=0.1, fontname="Arial", newrank=true];
+  node  [shape=box, style="rounded,filled", fontname="Arial", fontsize=12, margin="0.1,0.05", penwidth=0.9, color="#333333"];
+  edge  [fontname="Arial", fontsize=10, penwidth=1.3, arrowsize=0.75, color="#3f3f3f"];
+
+  subgraph cluster_A {
+    label="A. Data ingestion"; fontname="Arial"; fontsize=13; style="rounded,filled"; fillcolor="#f3f6f8"; color="#666666"; margin=8;
+    d1 [label="PATH · NYTS · NHANES\nBRFSS · NHIS", fillcolor="white"];
+    d2 [label="SEER and other\ncancer registries", fillcolor="white"];
+    d3 [label="PK, toxicant, and\nproduct-strength data", fillcolor="white"];
+  }
+  B [label="B. Synthetic-population generator\n(age × sex × risk-factor strata)", fillcolor="#d8e8f0"];
+  C [label="C. Exposure engine\n(CNE index · NMR ·\ndual-use state)", fillcolor="#d8e8f0"];
+  D [label="D. Biological-response engine\n(receptor, inflammation, oxidative,\nepithelial-turnover scores → TPS)", fillcolor="#e6dff0"];
+  E [label="E. Cancer-transition engine\n(multistate Markov / microsimulation)", fillcolor="#f9e4da"];
+  O [label="Outputs: prevalence · cumulative exposure ·\npremalignant burden · incidence per 100,000 PY ·\nattributable cases · net public-health impact", fillcolor="#f5c6b3"];
+  F [label="F. Policy-simulation\nengine (age · flavor ·\nnicotine cap · price ·\nlabels)", fillcolor="#e9f3ec"];
+  G [label="G. Uncertainty engine\n(Bayesian priors ·\nMonte Carlo · PSA)", fillcolor="#fdf3d7"];
+  H [label="H. Validation engine\n(back-testing · calibration ·\nposterior checks)", fillcolor="#fdf3d7"];
+
+  d1 -> B; d2 -> B; d3 -> C;
+  B -> C -> D -> E -> O [penwidth=1.7];
+  F -> C [style=dashed]; F -> E [style=dashed];
+  G -> C [style=dashed, color="#b8860b"]; G -> D [style=dashed, color="#b8860b"]; G -> E [style=dashed, color="#b8860b"];
+  E -> H [style=dashed, dir=both]; H -> O [style=dashed];
+
+  {rank=same; d1; d2; d3}
+  {rank=same; F; C; G}
+  {rank=same; E; H}
+  F -> C -> G [style=invis];
+  d1 -> d2 -> d3 [style=invis];
+}

@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below, together with the accompanying article."
+title: "Population–Molecular Cancer Digital Twin for oral nicotine pouches: figure-generation code and framework pseudocode"
+version: 1.0.0
+date-released: 2026-10-12
+license: MIT
+repository-code: "https://github.com/Guy-C-JR/nicotine-pouch-digital-twin"
+type: software
+authors:
+  - family-names: Giordano
+    given-names: Guy C.
+    name-suffix: Jr.
+    affiliation: "Independent Researcher, Brighton, Michigan, USA"
+    orcid: "https://orcid.org/0009-0002-6997-3567"
+    email: guy.c.giordano@gmail.com
+keywords:
+  - oral nicotine pouch
+  - digital twin
+  - artificial intelligence
+  - cancer risk forecasting
+  - tumor promotion
+  - tobacco harm reduction
+abstract: >-
+  Graphviz sources and Python scripts that regenerate every figure in the article
+  "Artificial intelligence–enabled digital twins for forecasting cancer burden from oral
+  nicotine pouches: a review and expert opinion", together with the framework pseudocode,
+  sample data schema, and validation and reproducibility checklists from its Supplementary
+  Methods. All plotted values are synthetic placeholders; no model was fitted to real data.

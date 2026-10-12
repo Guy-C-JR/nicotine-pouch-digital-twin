@@ -1,0 +1,47 @@
+// Figure S6. Policy-impact simulation schematic.
+// Solid = comparatively direct levers; dashed = behaviorally mediated, uncertain magnitude;
+// teal = switching-mediated displacement.
+// Render with:
+//   dot -Tpdf Figure_S6.dot -o ../Figure_S6.pdf
+//   dot -Tpng -Gdpi=600 Figure_S6.dot -o ../Figure_S6.png
+digraph FigS6 {
+  graph [rankdir=LR, nodesep=0.16, ranksep=0.45, pad=0.1, fontname="Arial", newrank=true];
+  node  [shape=box, style="rounded,filled", fontname="Arial", fontsize=12, margin="0.08,0.04", penwidth=0.9, color="#333333"];
+  edge  [fontname="Arial", fontsize=10.5, penwidth=1.3, arrowsize=0.75, color="#3f3f3f"];
+
+  subgraph cluster_levers {
+    label="Policy levers"; fontname="Arial"; fontsize=13; style="rounded,filled"; fillcolor="#e9f3ec"; color="#666666"; margin=8;
+    age   [label="Age / sales\nrestriction", fillcolor="white"];
+    flav  [label="Flavor\nrestriction", fillcolor="white"];
+    mkt   [label="Marketing /\nadvertising limits", fillcolor="white"];
+    cap   [label="Nicotine-\nconcentration cap", fillcolor="white"];
+    tax   [label="Tax / price", fillcolor="white"];
+    cess  [label="Cessation support\n+ warning labels", fillcolor="white"];
+  }
+
+  init   [label="Youth / never-smoker\ninitiation rate", fillcolor="#d8e8f0"];
+  dose   [label="Per-user systemic\nnicotine dose", fillcolor="#d8e8f0"];
+  dual   [label="Dual-use\nprevalence", fillcolor="#d8e8f0"];
+  sw     [label="Complete-switching\nfraction", fillcolor="#d8e8f0"];
+  expo   [label="Population\nnicotine exposure\n(CNE)", fillcolor="#e6dff0"];
+  burden [label="Projected\ncancer burden", fillcolor="#f5c6b3"];
+
+  age  -> init;
+  flav -> init [style=dashed];
+  mkt  -> init [style=dashed];
+  cap  -> dose;
+  tax  -> init [style=dashed];
+  tax  -> dual [style=dashed];
+  cess -> dual [style=dashed];
+  cess -> sw   [style=dashed];
+
+  init -> expo; dose -> expo; dual -> expo;
+  sw   -> expo   [color="#2a9d8f", fontcolor="#1f7a6f", label="reduces"];
+  expo -> burden [style=dashed, penwidth=1.7];
+  sw   -> burden [style=dashed, color="#2a9d8f", fontcolor="#1f7a6f", label="displacement"];
+
+  {rank=same; age; flav; mkt; cap; tax; cess}
+  age -> flav -> mkt -> cap -> tax -> cess [style=invis];
+  init -> dose -> dual -> sw [style=invis];
+  {rank=same; init; dose; dual; sw}
+}

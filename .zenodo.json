@@ -1,0 +1,23 @@
+{
+  "title": "Population–Molecular Cancer Digital Twin for oral nicotine pouches: figure-generation code and framework pseudocode",
+  "upload_type": "software",
+  "version": "1.0.0",
+  "language": "eng",
+  "description": "<p>Graphviz sources and Python scripts that regenerate every figure in the article <em>Artificial intelligence–enabled digital twins for forecasting cancer burden from oral nicotine pouches: a review and expert opinion</em> (submitted to <em>AI Biology &amp; Medicine</em>), together with the framework pseudocode, sample data schema, and validation and reproducibility checklists from its Supplementary Methods.</p><p>The article proposes a hypothesis-generating framework. No model was fitted to real data; the data-style figures plot synthetic placeholder values that illustrate output structure only.</p>",
+  "creators": [
+    {
+      "name": "Giordano Jr., Guy C.",
+      "affiliation": "Independent Researcher, Brighton, Michigan, USA",
+      "orcid": "0009-0002-6997-3567"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "oral nicotine pouch",
+    "digital twin",
+    "artificial intelligence",
+    "cancer risk forecasting",
+    "tumor promotion",
+    "tobacco harm reduction"
+  ]
+}

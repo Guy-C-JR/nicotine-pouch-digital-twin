@@ -1,0 +1,9 @@
+# Bayesian model sketch (Supplementary Methods M7); schematic, not runnable.
+# Hierarchical structure (schematic; e.g., Stan/PyMC)
+beta[k]          ~ Normal(mu_k, sigma_k)        # evidence-graded promotion-pathway priors
+mu_k             ~ Normal(0, tau)               # centered at zero: permits null effect
+kappa            ~ HalfNormal(s_kappa)          # exposure→hazard scale; Scenario I: s_kappa→0
+gamma            ~ Normal(0, 1)                 # confounder log-HRs (DAG-licensed set only)
+lambda_base[a,s] ~ calibrate_to(SEER)           # baseline hazards fixed by calibration
+y_cancer[i,t]    ~ multistate_likelihood(state, lambda_base, gamma, kappa, TPS)
+# Inference: NUTS; report full posteriors; NO single point estimate without interval.

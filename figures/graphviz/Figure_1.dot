@@ -1,0 +1,29 @@
+// Figure 1. Oral nicotine pouch exposure-to-cancer uncertainty map.
+// Node positions are fixed (points). Render with:
+//   neato -n2 -Tpdf Figure_1.dot -o ../Figure_1.pdf
+//   neato -n2 -Tpng -Gdpi=600 Figure_1.dot -o ../Figure_1.png
+digraph Fig1 {
+  graph [splines=true, pad=0.06, outputorder=edgesfirst, fontname="Arial", sep="+2"];
+  node  [shape=box, style="rounded,filled", fontname="Arial", fontsize=12, margin="0.06,0.04", penwidth=0.9, color="#333333"];
+  edge  [fontname="Arial", fontsize=10.5, penwidth=1.3, arrowsize=0.75, color="#3f3f3f"];
+
+  // Top row: nicotine pathway (exposure -> biology)
+  pouch  [pos="50,150!",  label="Pouch use\n(strength,\npouches/day,\nyears, dwell time)", fillcolor="#d8e8f0"];
+  absorb [pos="171,150!", label="Oromucosal\nabsorption\n(pH, free base)", fillcolor="#d8e8f0"];
+  sys    [pos="294,150!", label="Systemic\nnicotine and\ncotinine\n(CYP2A6, NMR)", fillcolor="#d8e8f0"];
+  rec    [pos="414,150!", label="nAChR\nsignaling\n(α4β2, α7,\nα3β4)", fillcolor="#e6dff0"];
+  tissue [pos="537,150!", label="Tissue-level\neffects\n(proliferation,\nangiogenesis,\ninflammation,\noxidative stress)", fillcolor="#e6dff0"];
+
+  // Bottom row: displacement pathway and outcomes
+  disp   [pos="50,30!",   label="Smoking\ndisplacement", shape=note, style=filled, fillcolor="#eaf4ee"];
+  smoke  [pos="200,30!",  label="Combustion-smoke\ncarcinogens\n(TSNA, PAH, metals)", shape=note, style=filled, fillcolor="#f0f0f0"];
+  ca     [pos="400,30!",  label="Cancer\nincidence and\nmortality", fillcolor="#f5c6b3"];
+  pre    [pos="537,30!",  label="Oral premalignant\nchange (reversible\n→ dysplasia)", fillcolor="#f9e4da"];
+
+  pouch -> absorb -> sys -> rec -> tissue;
+  tissue -> pre [style=dashed];
+  pre -> ca     [style=dashed];
+  pouch -> disp [style=dashed];
+  disp -> smoke [style=dashed, color="#2a9d8f", fontcolor="#1f7a6f", label="reduces"];
+  smoke -> ca   [color="#9b2226", penwidth=2.2, fontcolor="#9b2226", label="established"];
+}

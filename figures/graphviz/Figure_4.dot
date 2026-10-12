@@ -1,0 +1,55 @@
+// Figure 4. Causal DAG for oral nicotine pouch use and cancer incidence.
+// Render with:
+//   dot -Tpdf Figure_4.dot -o ../Figure_4.pdf
+//   dot -Tpng -Gdpi=600 Figure_4.dot -o ../Figure_4.png
+digraph Fig4 {
+  graph [rankdir=TB, nodesep=0.16, ranksep=0.34, pad=0.1, fontname="Arial", newrank=true];
+  node  [shape=box, style="rounded,filled", fontname="Arial", fontsize=12, margin="0.07,0.03", penwidth=0.9, color="#333333", fillcolor="#eef1f4"];
+  edge  [fontname="Arial", fontsize=10, penwidth=1.1, arrowsize=0.65, color="#555555"];
+
+  ses    [label="Socioeconomic\nstatus"];
+  age    [label="Age"];
+  sex    [label="Sex"];
+  dep    [label="Nicotine\ndependence"];
+  smk    [label="Smoking\nhistory", fillcolor="#f3d9db"];
+  slt    [label="Smokeless\ntobacco history", fillcolor="#f3d9db"];
+  vape   [label="Vaping\nhistory", fillcolor="#f3d9db"];
+  hyg    [label="Oral hygiene /\ndental care"];
+  cyp    [label="CYP2A6\ngenotype"];
+  dm     [label="Diabetes /\nmetabolic"];
+  alc    [label="Alcohol"];
+  hpv    [label="HPV status
+(oropharynx)"];
+  diet   [label="Diet"];
+  pouch  [label="Pouch use", fillcolor="#d8e8f0"];
+  nic    [label="Total nicotine\nexposure", fillcolor="#d8e8f0"];
+  infl   [label="Inflammatory\nbiomarkers", fillcolor="#e6dff0"];
+  det    [label="Surveillance /\ndetection", fillcolor="#fdf3d7"];
+  les    [label="Premalignant\nlesion", fillcolor="#f9e4da"];
+  ca     [label="Cancer\ndiagnosis", fillcolor="#f5c6b3"];
+
+  // Exposure path
+  pouch -> nic [penwidth=1.8, color="#333333"];
+  dep -> pouch; dep -> nic; vape -> nic; sex -> cyp; cyp -> nic;
+  // Hypothesized promotion path (mediators)
+  nic -> infl [style=dashed]; nic -> les [style=dashed]; infl -> les [style=dashed];
+  les -> ca [penwidth=1.6, color="#333333"];
+  // Confounding
+  smk -> pouch; smk -> les; smk -> ca [color="#9b2226", penwidth=2.2];
+  slt -> les; slt -> ca;
+  ses -> pouch; ses -> hyg; hyg -> les;
+  age -> pouch; age -> ca;
+  alc -> les; alc -> ca;
+  dm -> infl; dm -> ca;
+  hpv -> ca;
+  diet -> ca;
+  // Detection (collider-prone node)
+  pouch -> det [style=dashed]; ses -> det [style=dashed];
+  det -> ca [style=dashed];
+  ses -> ca [style=dashed];
+
+  {rank=same; ses; age; sex; dep; smk}
+  {rank=same; pouch; cyp; vape; hyg}
+  {rank=same; nic; slt; dm; det}
+  {rank=same; infl; alc; hpv; diet}
+}

@@ -1,0 +1,34 @@
+// Figure 3. Multistate cancer-transition model (Layer 3).
+// Node positions are fixed (points). Render with:
+//   neato -n2 -Tpdf Figure_3.dot -o ../Figure_3.pdf
+//   neato -n2 -Tpng -Gdpi=600 Figure_3.dot -o ../Figure_3.png
+digraph Fig3 {
+  graph [splines=true, pad=0.06, outputorder=edgesfirst, fontname="Arial", sep="+2"];
+  node  [shape=box, style="rounded,filled", fontname="Arial", fontsize=12, margin="0.07,0.04", penwidth=0.9, color="#333333"];
+  edge  [fontname="Arial", fontsize=10.5, penwidth=1.3, arrowsize=0.75, color="#3f3f3f"];
+
+  // Forward chain (y = 110) and absorbing state below invasive cancer
+  h   [pos="32,110!",  label="Healthy\nmucosa", fillcolor="#eaf4ee"];
+  i   [pos="190,110!", label="Reversible\ninflammatory\nlesion", fillcolor="#fdf3d7"];
+  p   [pos="345,110!", label="Premalignant\n(dysplasia)", fillcolor="#f9e4da"];
+  c   [pos="492,110!", label="Invasive\ncancer", fillcolor="#f5c6b3"];
+  cd  [pos="603,110!", label="Cancer\ndeath", fillcolor="#e6b8b8"];
+  s   [pos="492,18!",  label="Survival or other-cause death", fillcolor="#e3e8ee"];
+  key [pos="175,22!",  shape=plaintext, style="", fontsize=10.5, label=<<I>M</I> = 1 + κ·TPS (promotion multiplier)>];
+
+  // Progression (TPS-modified promotion steps dashed)
+  h -> i  [label=<λ<SUB>1</SUB> (exposure)>];
+  i -> p  [label=<λ<SUB>2</SUB> · <I>M</I>>, style=dashed];
+  p -> c  [label=<λ<SUB>3</SUB> · <I>M</I>>, style=dashed];
+  c -> cd [label=<μ<SUB>ca</SUB>>];
+  c -> s  [label="recovery"];
+
+  // Regression arcs drawn above the chain
+  i -> h  [tailport=nw, headport=ne, style=dashed, color="#2a9d8f", fontcolor="#1f7a6f", label="regression"];
+  p -> i  [tailport=nw, headport=ne, style=dashed, color="#2a9d8f", fontcolor="#1f7a6f", label="regression"];
+
+  // Competing other-cause mortality
+  h -> s  [tailport=s, style=dotted, label=<μ<SUB>other</SUB>>];
+  i -> s  [tailport=s, style=dotted];
+  p -> s  [tailport=s, style=dotted];
+}

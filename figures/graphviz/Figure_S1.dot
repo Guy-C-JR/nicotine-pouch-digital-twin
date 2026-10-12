@@ -1,0 +1,48 @@
+// Figure S1. Candidate nicotine tumor-promotion signaling pathways.
+// Solid = repeatedly reported in model systems; dashed = weaker or context-dependent.
+// Render with:
+//   dot -Tpdf Figure_S1.dot -o ../Figure_S1.pdf
+//   dot -Tpng -Gdpi=600 Figure_S1.dot -o ../Figure_S1.png
+digraph FigS1 {
+  graph [rankdir=TB, nodesep=0.14, ranksep=0.34, pad=0.1, fontname="Arial", newrank=true];
+  node  [shape=box, style="rounded,filled", fontname="Arial", fontsize=12, margin="0.07,0.04", penwidth=0.9, color="#333333"];
+  edge  [fontname="Arial", fontsize=10, penwidth=1.3, arrowsize=0.75, color="#3f3f3f"];
+
+  nic   [label="Nicotine", shape=ellipse, style=filled, fillcolor="#d8e8f0"];
+  rec   [label="nAChR activation\n(α7, α4β2, α3β4)", fillcolor="#d8e8f0"];
+  ca    [label=<Ca<SUP>2+</SUP> influx /<BR/>β-arrestin>, fillcolor="#e6dff0"];
+  nfkb  [label="NF-κB", fillcolor="#e6dff0"];
+  pi3k  [label="PI3K / AKT / mTOR", fillcolor="#e6dff0"];
+  mapk  [label="MAPK / ERK", fillcolor="#e6dff0"];
+  jak   [label="JAK / STAT3", fillcolor="#e6dff0"];
+
+  infl  [label="Inflammation /\ncytokines\n(IL-6, TNF)", fillcolor="#f9e4da"];
+  ros   [label="Oxidative stress /\nDNA-damage\nmarkers", fillcolor="#f9e4da"];
+  apo   [label="Apoptosis\nresistance\n(Bcl-2↑)", fillcolor="#f9e4da"];
+  emt   [label="EMT / invasion\n(E-cadherin↓,\nvimentin↑)", fillcolor="#f9e4da"];
+  vegf  [label="VEGF /\nangiogenesis", fillcolor="#f9e4da"];
+  prol  [label="Proliferation /\nsurvival", fillcolor="#f9e4da"];
+
+  nic -> rec;
+  rec -> ca;
+  rec -> nfkb [style=dashed];
+  rec -> jak  [style=dashed];
+  ca -> pi3k; ca -> mapk;
+
+  nfkb -> infl;
+  nfkb -> apo  [style=dashed];
+  pi3k -> apo;
+  pi3k -> emt  [style=dashed];
+  pi3k -> vegf [style=dashed];
+  pi3k -> prol;
+  mapk -> vegf [style=dashed];
+  mapk -> prol;
+  jak  -> prol [style=dashed];
+  infl -> ros  [style=dashed];
+  ros  -> emt  [style=dashed];
+
+  {rank=same; nfkb; pi3k; mapk; jak}
+  {rank=same; infl; ros; apo; emt; vegf; prol}
+  infl -> ros -> apo -> emt -> vegf -> prol [style=invis];
+  nfkb -> pi3k -> mapk -> jak [style=invis];
+}
